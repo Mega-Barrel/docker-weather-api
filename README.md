@@ -1,10 +1,10 @@
 # docker-weather-api
 
-Implementing a weather service for getting current weather, and previous day weather for Mumbai city using Weather API
+Implementing a weather service to get the previous day's weather data for Mumbai city using Weather API.
 
 ## .env file
 Create a **.env** file inside the folder
-Now open the **.env** file and add the following, and save and close the file
+Now open the **.env** file, add the following, and save and close the file
 ```text
 weather-api = 'YOUR API Key'
 ```
@@ -40,7 +40,7 @@ python3 app/main.py
 
 ## Setup - Docker
 ### Environment Variable Setup
-Open the Dockerfile and go to line 26, and paste your bearer token where it says **'API Key'**. Eg:
+Open the Dockerfile, go to line 26, and paste your bearer token where it says **'API Key'**. Eg:
 ```Dockerfile
 # SET ENVIRONMENT VARIABLE
 ENV weather-api 'Paste your API Key'
@@ -57,6 +57,6 @@ To run the Weather API using Docker, follow these steps:
   ```bash
    docker run --rm weather-api .
   ```
-The Weather API should now be executing and will display the answer in terminal.
+The Weather API should now be executing and will display the output in the terminal.
 
 Feel free to contribute to this project or report any issues you encounter. Happy coding!
