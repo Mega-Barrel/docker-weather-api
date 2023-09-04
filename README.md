@@ -2,7 +2,7 @@
 
 Implementing a weather service for getting current weather, and previous day weather for Mumbai city using Weather API
 
-## Setup - code
+## Setup - local
 To use the Weather API Tool, follow the steps below:
 
 **1. Clone the repository:** git clone https://github.com/Mega-Barrel/docker-weather-api.git
@@ -24,6 +24,9 @@ To use the Weather API Tool, follow the steps below:
 **4. Install the required dependencies:** pip install -r requirements.txt
 
 Now you can run the Weather API locally.
+```bash
+python3 app/main.py
+```
 
 ## Setup - Docker
 To run the Weather API using Docker, follow these steps:
