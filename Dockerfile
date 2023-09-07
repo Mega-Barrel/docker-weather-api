@@ -20,6 +20,7 @@ WORKDIR /app
 COPY /app/main.py /app/main.py
 COPY /requirements.txt /app/requirements.txt
 
+# Install packages
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 # SET ENVIRONMENT VARIABLE
