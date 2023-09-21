@@ -18,6 +18,7 @@ def get_api_key():
     else:
         return API_KEY
 
+# Extract
 def request_data(key, query, dt):
     """
     Method to Make a call to weather API
@@ -39,11 +40,14 @@ def request_data(key, query, dt):
     else:
         return 'Error while retriving data'
 
+# Transform
 def get_weather_data(api_key, query, date):
     """
     Retrieve weather data for a given location and date.
     """
+    # Call to request_data function to get the data.
     resp = request_data(key=api_key, query=query, dt=date)
+
     city_location = f"{resp['location']['name']}/{resp['location']['country']}"
     last_updated = resp['current']['last_updated']
     request_time = resp['location']['localtime']
@@ -71,13 +75,20 @@ def get_weather_data(api_key, query, date):
         'feelslike_f': feelslike_f
     }
 
+# load
+def load_weather_data(data, database):
+    """
+    Load the weather data to a postgresql database
+    """
+    pass
+
 def main():
     """
     Method to call current_hour weather data,
     and previous day data.
     """
     load_dotenv()
-    
+
     # Constants
     API_KEY = get_api_key()
     QUERY = 'Mumbai'
