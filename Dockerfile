@@ -19,12 +19,13 @@ WORKDIR /app
 # Copy files from app to WORKDIR
 COPY /app/main.py /app/main.py
 COPY /requirements.txt /app/requirements.txt
+COPY /cronjob.sh /app/cronjob.sh
 
 # Install packages
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-# SET ENVIRONMENT VARIABLE
-ENV weather-api 'API Key'
+# Add the cron job schedule and start the cron service
+RUN echo "*/5 * * * * /bin/sh /app/cronjob.sh" > /etc/crontabs/root
 
 # RUN the application
-CMD [ "python3", "main.py"]
+CMD [ "crond", "-f" ]
