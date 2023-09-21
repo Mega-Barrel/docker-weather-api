@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+
+  # backend service
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - weather-api=99064342cb5545b09dd113350230309
+    container_name: backend-weather-api
