@@ -1,8 +1,8 @@
-# API KEY
-weather-api '99064342cb5545b09dd113350230309'
-
 # Environment variable
 weather-api-env/
 
 # Credential file
 .env
+
+# cache folder
+__pycache__
