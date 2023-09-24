@@ -1,8 +1,5 @@
 # env directory
 weather-api-env/
 
-# credential folder
-.env
-
 # cache folder
 __pycache__
