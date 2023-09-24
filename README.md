@@ -1,62 +1,57 @@
 # docker-weather-api
 
-Implementing a weather service to get the previous day's weather data for Mumbai city using Weather API.
+Implementing a weather service to get the live *(every 10 minutes)* weather data for Mumbai city.
 
-## .env file
-Create a **.env** file inside the folder
-Now open the **.env** file, add the following, and save and close the file
-```text
-weather-api = 'YOUR API Key'
-```
+#### Notes
+- This a ETL project which consumes weather api data and stores the data to a PostgreSQL databasea.
+- Uses cronjob to execute the app/main.py script every 10 minutes.
 
 ## Weather API Token
 Head over to [weatherapi](https://www.weatherapi.com/) site, and create a free account, and copy & paste API Key inside .env file
 
-## Setup - local
-To use the Weather API Tool, follow the steps below:
-
-**1. Clone the repository:** git clone https://github.com/Mega-Barrel/docker-weather-api.git
-
-**2. Navigate to the project directory:** cd docker-weather-api
-
-**3. Set up a virtual environment (optional but recommended):**
-- On Windows:
-  ```
-  python -m venv weather-api-env
-  weather-api-env\Scripts\activate
-  ```
-
-- On Linux/macOS:
-  ```
-  python3 -m venv weather-api-env
-  source weather-api-env/bin/activate
-  ```
-**4. Install the required dependencies:** pip install -r requirements.txt
-
-Now you can run the Weather API locally.
-```bash
-python3 app/main.py
+## .env file
+Create a **.env** file inside the folder
+Now open the **.env** file, add the following <u>without</u> any **''**, and save and close the file
+```text
+weather_api = enter your key
+POSTGRES_HOST = host name
+POSTGRES_PORT = port number
+POSTGRES_DB = database name
+POSTGRES_USER = database user
+POSTGRES_PASSWORD = database password
 ```
 
-## Setup - Docker
+## Setup - Requirements
+  - Docker
+
+## Setup - Docker Compose
 ### Environment Variable Setup
-Open the Dockerfile, go to line 26, and paste your bearer token where it says **'API Key'**. Eg:
-```Dockerfile
-# SET ENVIRONMENT VARIABLE
-ENV weather-api 'Paste your API Key'
+- Download or clone the repository.
+- Create a .env file and add your credentials, as listed above.
+
+## Run the Weather ETL Project
+Run the container in either using detached mode
+```bash
+# Not using detached mode
+docker compose up
+
+# using detached mode
+docker compose up -d
 ```
 
-### Build the Docker Image & Run the container
-To run the Weather API using Docker, follow these steps:
-  1.  Install Docker: [Docker Installation Guide](https://docs.docker.com/get-docker/)
-  2. Build the Docker image: 
-  ```bash
-   docker build -t weather-api .
-  ```
-  3. Run the Docker container:
-  ```bash
-   docker run --rm weather-api .
-  ```
-The Weather API should now be executing and will display the output in the terminal.
+start/stop the docker containers
+```bash
+# start the container
+docker container start
 
+# stop the container
+docker container stop
+```
+
+Stop and remove the containers (Optional). Note this will only remove the containers, not the database volumen and its base images.
+```bash
+docker compose down
+```
+
+The Weather API should now be executing and will display the output in the terminal.
 Feel free to contribute to this project or report any issues you encounter. Happy coding!
