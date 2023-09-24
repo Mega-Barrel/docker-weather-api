@@ -2,11 +2,37 @@ version: '3'
 
 services:
 
+  # Database service
+  postgres:
+    image: postgres:latest
+    container_name: postgres-db
+    ports:
+      - 9932:5432
+    environment:
+      POSTGRES_DB: weather-api-db
+      POSTGRES_USER: saurabh
+      POSTGRES_PASSWORD: test-weather-api
+    # Add this section to run the initialization script
+    command: ["postgres", "-c", "log_statement=all"]
+    volumes:
+      - weather-api-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Mount the SQL script
+
   # backend service
   backend:
     build:
       context: .
       dockerfile: Dockerfile
-    environment:
-      - weather-api=99064342cb5545b09dd113350230309
     container_name: backend-weather-api
+    depends_on:
+      - postgres
+    environment:
+      weather-api: 99064342cb5545b09dd113350230309
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: weather-api-db
+      POSTGRES_USER: saurabh
+      POSTGRES_PASSWORD: test-weather-api
+
+volumes:
+  weather-api-data:
