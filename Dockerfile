@@ -23,7 +23,7 @@ COPY . /weather-api/
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Add the cron job schedule and start the cron service
-RUN echo "*/5 * * * * /bin/sh /weather-api/cronjob.sh" > /etc/crontabs/root
+RUN echo "*/10 * * * * /bin/sh /weather-api/cronjob.sh" > /etc/crontabs/root
 
 # RUN the application
 CMD [ "crond", "-f" ]
