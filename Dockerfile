@@ -14,18 +14,16 @@ RUN apk update && \
     apk add --no-cache python3 py3-pip
 
 # SET WORKING DIR
-WORKDIR /app
+WORKDIR /weather-api
 
 # Copy files from app to WORKDIR
-COPY /app/main.py /app/main.py
-COPY /requirements.txt /app/requirements.txt
-COPY /cronjob.sh /app/cronjob.sh
+COPY . /weather-api/
 
 # Install packages
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Add the cron job schedule and start the cron service
-RUN echo "*/5 * * * * /bin/sh /app/cronjob.sh" > /etc/crontabs/root
+RUN echo "*/5 * * * * /bin/sh /weather-api/cronjob.sh" > /etc/crontabs/root
 
 # RUN the application
 CMD [ "crond", "-f" ]
