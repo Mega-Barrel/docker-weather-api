@@ -17,23 +17,23 @@ class WeatherApi():
         load_dotenv()
 
         # Constants
-        self.api_key = self.get_api_key()
+        self._api_key = self.get_api_key()
         self.query = 'Mumbai'
         # Get previous day's date
         self.curr_dt = datetime.now().strftime('%Y-%m-%d')
-
+        # DB params
         self._db_params = {
-            "host": "postgres",
-            "database": "weather-api-db",
-            "user": "saurabh",
-            "password": "test-weather-api"
+            "host": os.environ.get('POSTGRES_HOST'),
+            "database": os.environ.get('POSTGRES_DB'),
+            "user": os.environ.get('POSTGRES_USER'),
+            "password": os.environ.get('POSTGRES_PASSWORD')
         }
 
     def get_api_key(self):
         """
         Returns the API key from environment variable.
         """
-        API_KEY = os.environ.get('weather-api')
+        API_KEY = os.environ.get('weather_api')
         if not API_KEY:
             raise ValueError('API key is not available.')
         else:
@@ -59,7 +59,7 @@ class WeatherApi():
             print('API Status ' + str(resp.status_code) + ' OK')
             return resp.json()
         else:
-            return 'Error while retriving data'
+            print( 'Error while retriving data' )
 
     # Transform
     def get_weather_data(self, resp):
@@ -162,7 +162,7 @@ class WeatherApi():
         Method to execute ETL process
         """
         # Extract
-        resp = self.request_data(key=self.api_key, query=self.query, dt=self.curr_dt)
+        resp = self.request_data(key=self._api_key, query=self.query, dt=self.curr_dt)
         # Transform
         data = self.get_weather_data(resp=resp)
         # Load
