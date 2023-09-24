@@ -15,7 +15,7 @@ class WeatherApi():
         Constructor
         """
         load_dotenv()
-        
+
         # Constants
         self.api_key = self.get_api_key()
         self.query = 'Mumbai'
@@ -167,7 +167,6 @@ class WeatherApi():
         data = self.get_weather_data(resp=resp)
         # Load
         self.load_record(data=data)
-
 
 def main():
     """
